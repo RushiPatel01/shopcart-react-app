@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export const Search = ({ products, GridList }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const filteredProducts = products.filter((product) =>
-    product.name.toLowerCase().includes(searchTerm.toLowerCase())
+    product.name?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
@@ -33,7 +33,7 @@ export const Search = ({ products, GridList }) => {
                 <div>
                   <div className="pro-thumb h-25">
                     <img
-                      src={product.img}
+                      src={product.imageUrl}
                       alt=""
                       width={70}
                       className="flex-{grow|shrink}-0"
@@ -41,10 +41,10 @@ export const Search = ({ products, GridList }) => {
                   </div>
                 </div>
                 <div className="product-content">
-                    <p>
-                        <Link to={`/shop/${product.id}`}>{product.name}</Link>
-                    </p>
-                    <h6>${product.price}</h6>
+                  <p>
+                    <Link to={`/shop/${product.id}`}>{product.title}</Link>
+                  </p>
+                  <h6>${product.price}</h6>
                 </div>
               </div>
             </Link>

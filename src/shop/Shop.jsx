@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PageHeader from "../components/PageHeader";
 import Data from "../products.json";
 import ProductCards from "./ProductCards";
@@ -7,22 +7,41 @@ import { Search } from "./Search";
 import ShopCategory from "./ShopCategory";
 import PopularPost from "./PopularPost";
 import Tags from "./Tags";
+import { db } from "../firebase/firebase.config";
+import { collection, getDocs } from "firebase/firestore/lite";
 
 const shopResults = "Showing 01-12 of 139 Results";
 
 const Shop = () => {
   const [GridList, setGridList] = useState(true);
-  const [products, setProducts] = useState(Data);
-  // console.log(products);
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, "products"));
+        const newData = querySnapshot.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }));
+        console.log(newData);
+        setProducts(newData);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    };
 
-  // pagination
+    fetchProducts();
+  }, []);
 
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 12;
 
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = products.slice(indexOfFirstProduct,indexOfLastProduct);
+  const currentProducts = products.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
 
   // function to change current page
 
@@ -32,17 +51,17 @@ const Shop = () => {
 
   // filter products based on category
 
-  const[selectedCategory,setSelectedCategory] = useState("All");
-  const menuItems = [...new Set(Data.map((val) =>val.category))];
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const menuItems = [...new Set(Data.map((val) => val.category))];
 
   const filterItem = (curcat) => {
     const newItem = Data.filter((newVal) => {
       return newVal.category === curcat;
-    })
+    });
 
     setSelectedCategory(curcat);
     setProducts(newItem);
-  }
+  };
 
   return (
     <div>
@@ -72,7 +91,10 @@ const Shop = () => {
 
                 {/* product cards  */}
                 <div>
-                  <ProductCards GridList={GridList} products={currentProducts} />
+                  <ProductCards
+                    GridList={GridList}
+                    products={currentProducts}
+                  />
                 </div>
 
                 <Pagination
@@ -85,13 +107,13 @@ const Shop = () => {
             </div>
             <div className="col-lg-4 col-12">
               <aside>
-                <Search  products={products} GridList={GridList}/>
-                <ShopCategory 
-                filterItem={filterItem}
-                setItem={setProducts}
-                menuItems={menuItems}
-                setProducts={setProducts}
-                selectedCategory={selectedCategory}
+                <Search products={products} GridList={GridList} />
+                <ShopCategory
+                  filterItem={filterItem}
+                  setItem={setProducts}
+                  menuItems={menuItems}
+                  setProducts={setProducts}
+                  selectedCategory={selectedCategory}
                 />
                 <PopularPost />
                 <Tags />

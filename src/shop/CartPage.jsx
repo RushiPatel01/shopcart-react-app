@@ -92,11 +92,11 @@ const CartPage = () => {
                         <div className="p-thumb">
                           <Link to="/shop">
                             {" "}
-                            <img src={item.img} alt="" />{" "}
+                            <img src={item.imageUrl} alt="imageUrl" />{" "}
                           </Link>
                         </div>
                         <div className="p-content">
-                          <Link to="/shop">{item.name}</Link>
+                          <Link to="/shop">{item.title}</Link>
                         </div>
                       </td>
                       <td className="cat-price">${item.price}</td>
