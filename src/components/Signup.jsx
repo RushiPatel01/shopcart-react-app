@@ -127,22 +127,22 @@ const Signup = () => {
                 </button>
               </li>
               <li>
-                <a href="/" className="facebook">
+                <a href="https://www.facebook.com/login/" className="facebook">
                   <i className="icofont-facebook"></i>
                 </a>
               </li>
               <li>
-                <a href="/" className="twitter">
+                <a href="https://twitter.com/login/" className="twitter">
                   <i className="icofont-twitter"></i>
                 </a>
               </li>
               <li>
-                <a href="/" className="linkedin">
+                <a href="https://www.linkedin.com/login/" className="linkedin">
                   <i className="icofont-linkedin"></i>
                 </a>
               </li>
               <li>
-                <a href="/" className="instagram">
+                <a href="https://www.instagram.com/accounts/login/?hl=en/" className="instagram">
                   <i className="icofont-instagram"></i>
                 </a>
               </li>

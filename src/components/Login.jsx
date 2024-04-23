@@ -16,6 +16,7 @@ const socialList = [
 
 const Login = () => {
   const [errorMessage, seterrorMessage] = useState("");
+  const [successMessage,setSuccessMessage] = useState("");
   const { signUpWithGmail, login } = useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
@@ -51,7 +52,19 @@ const Login = () => {
         const errorMsg = error.message;
         seterrorMessage("Please provide valid email & password!");
       });
-   
+  };
+  const handleForgotPassword = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const email = form.email.value;
+
+    resetPassword(email)
+      .then(() => {
+        setSuccessMessage("Password reset email sent successfully!");
+      })
+      .catch((error) => {
+        seterrorMessage(error.message);
+      });
   };
 
   return (
@@ -82,6 +95,11 @@ const Login = () => {
 
               {/* showing message */}
               <div>
+                {successMessage && (
+                  <div className="success-message text-success mb-1">
+                    {successMessage}
+                  </div>
+                )}
                 {errorMessage && (
                   <div className="error-message text-danger mb-1">
                     {errorMessage}
@@ -95,7 +113,9 @@ const Login = () => {
                     <input type="checkbox" name="remember" id="remember" />
                     <label htmlFor="remember">Remember Me</label>
                   </div>
-                  <Link to="/forgetpass">Forget Password?</Link>
+                  <Link to="/forgot-password" onClick={handleForgotPassword}>
+                    Forget Password?
+                  </Link>
                 </div>
               </div>
               <div className="form-group">
@@ -123,22 +143,31 @@ const Login = () => {
                   </button>
                 </li>
                 <li>
-                  <a href="/" className="facebook">
+                  <a
+                    href="https://www.facebook.com/login/"
+                    className="facebook"
+                  >
                     <i className="icofont-facebook"></i>
                   </a>
                 </li>
                 <li>
-                  <a href="/" className="twitter">
+                  <a href="https://twitter.com/login/" className="twitter">
                     <i className="icofont-twitter"></i>
                   </a>
                 </li>
                 <li>
-                  <a href="/" className="linkedin">
+                  <a
+                    href="https://www.linkedin.com/login/"
+                    className="linkedin"
+                  >
                     <i className="icofont-linkedin"></i>
                   </a>
                 </li>
                 <li>
-                  <a href="/" className="instagram">
+                  <a
+                    href="https://www.instagram.com/accounts/login/?hl=en/"
+                    className="instagram"
+                  >
                     <i className="icofont-instagram"></i>
                   </a>
                 </li>

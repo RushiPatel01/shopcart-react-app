@@ -26,27 +26,27 @@ const addressList = [
 const socialList = [
   {
     iconName: "icofont-facebook",
-    siteLink: "#",
+    siteLink: "https://www.facebook.com/",
     className: "facebook",
   },
   {
     iconName: "icofont-twitter",
-    siteLink: "#",
+    siteLink: "https://twitter.com/?lang=en",
     className: "twitter",
   },
   {
     iconName: "icofont-linkedin",
-    siteLink: "#",
+    siteLink: "https://in.linkedin.com/",
     className: "linkedin",
   },
   {
     iconName: "icofont-instagram",
-    siteLink: "#",
+    siteLink: "https://www.instagram.com/",
     className: "instagram",
   },
   {
     iconName: "icofont-pinterest",
-    siteLink: "#",
+    siteLink: "https://in.pinterest.com/",
     className: "pinterest",
   },
 ];
@@ -69,12 +69,8 @@ const ItemList = [
     link: "/about",
   },
   {
-    text: "Policy",
-    link: "#",
-  },
-  {
-    text: "FAQs",
-    link: "/about",
+    text: "Contact",
+    link: "/contact",
   },
 ];
 
@@ -110,8 +106,9 @@ const tweetList = [
     iconName: "icofont-twitter",
     desc: (
       <p>
-        Aminur islam <a href="#">@ShopCart Greetings! #HTML_Template</a> Grab
-        your item, 50% Big Sale Offer !!
+        Aminur islam{" "}
+        <a href="/cart-page">@ShopCart Greetings! #HTML_Template</a> Grab your
+        item, 50% Big Sale Offer !!
       </p>
     ),
   },
@@ -119,29 +116,10 @@ const tweetList = [
     iconName: "icofont-twitter",
     desc: (
       <p>
-        Somrat islam <a href="#">@ShopCart Hey! #HTML_Template</a> Grab your
-        item, 50% Big Sale Offer !!
+        Somrat islam <a href="/cart-page">@ShopCart Hey! #HTML_Template</a> Grab
+        your item, 50% Big Sale Offer !!
       </p>
     ),
-  },
-];
-
-const footerbottomList = [
-  {
-    text: "Faculty",
-    link: "#",
-  },
-  {
-    text: "Staff",
-    link: "#",
-  },
-  {
-    text: "Students",
-    link: "#",
-  },
-  {
-    text: "Alumni",
-    link: "#",
   },
 ];
 
@@ -170,7 +148,9 @@ const Footer = () => {
                       <ul className="lab-ul social-icons">
                         {socialList.map((val, i) => (
                           <li key={i}>
-                            <a href="#" className={val.className}><i className={val.iconName}>{val.text}</i></a>
+                            <a href={val.siteLink} className={val.className}>
+                              <i className={val.iconName}>{val.text}</i>
+                            </a>
                           </li>
                         ))}
                       </ul>
@@ -190,11 +170,10 @@ const Footer = () => {
                       <ul className="lab-ul office-address">
                         {ItemList.map((val, i) => (
                           <li key={i}>
-                            <a href="#">{val.text}</a>
+                            <a href={val.link}>{val.text}</a>
                           </li>
                         ))}
                       </ul>
-                      
                     </div>
                   </div>
                 </div>
@@ -211,11 +190,10 @@ const Footer = () => {
                       <ul className="lab-ul office-address">
                         {quickList.map((val, i) => (
                           <li key={i}>
-                            <a href="#">{val.text}</a>
+                            <a href={val.link}>{val.text}</a>
                           </li>
                         ))}
                       </ul>
-                      
                     </div>
                   </div>
                 </div>
@@ -237,7 +215,6 @@ const Footer = () => {
                           </li>
                         ))}
                       </ul>
-                      
                     </div>
                   </div>
                 </div>
@@ -250,16 +227,21 @@ const Footer = () => {
       {/* footer bottom */}
       <div className="footer-bottom">
         <div className="container">
-            <div className="section-wrapper">
-                <p>&copy; 2024 <Link to="/"> Shop Cart</Link> Designed by <a href="/" target="_blank">Rushi Patel</a></p>
-                <div className="footer-bottom-list">
+          <div className="section-wrapper">
+            <p>
+              &copy; 2024 <Link to="/"> Shop Cart</Link> Designed by{" "}
+              <a href="/" target="_blank">
+                Rushi Patel
+              </a>
+            </p>
+            {/* <div className="footer-bottom-list">
                     {
                         footerbottomList.map((val,i) => (
                             <a href="#" key={i}>{val.text}</a> 
                         ))
                     }
-                </div>
-            </div>
+                </div> */}
+          </div>
         </div>
       </div>
     </footer>

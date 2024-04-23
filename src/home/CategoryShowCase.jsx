@@ -11,7 +11,7 @@ const ProductData = [
     title: "Nike Premier X",
     author: "assets/images/course/author/01.jpg",
     brand: "Nike",
-    price: "$199.00",
+    price: "$299.00",
     id: 1,
   },
   {
@@ -20,7 +20,7 @@ const ProductData = [
     title: "Asthetic Bags",
     author: "assets/images/course/author/02.jpg",
     brand: "D&J Bags",
-    price: "$199.00",
+    price: "$139.00",
     id: 2,
   },
   {
@@ -29,7 +29,7 @@ const ProductData = [
     title: "iPhone 12",
     author: "src/assets/images/categoryTab/brand/apple.png",
     brand: "Apple",
-    price: "$199.00",
+    price: "$399.00",
     id: 3,
   },
   {
@@ -38,7 +38,7 @@ const ProductData = [
     title: "Hiking Bag 15 Nh100",
     author: "assets/images/course/author/04.jpg",
     brand: "Gucci",
-    price: "$199.00",
+    price: "$149.00",
     id: 4,
   },
   {
@@ -47,7 +47,7 @@ const ProductData = [
     title: "Outdoor Sports Shoes",
     author: "assets/images/course/author/05.jpg",
     brand: "Nike",
-    price: "$199.00",
+    price: "$249.00",
     id: 5,
   },
   {
@@ -65,7 +65,7 @@ const ProductData = [
     title: "Look Less Chanel Bag ",
     author: "assets/images/course/author/01.jpg",
     brand: "Gucci",
-    price: "$199.00",
+    price: "$399.00",
     id: 7,
   },
   {
@@ -74,7 +74,7 @@ const ProductData = [
     title: "Casual Sneakers",
     author: "assets/images/course/author/02.jpg",
     brand: "Bata",
-    price: "$199.00",
+    price: "$299.00",
     id: 8,
   },
 ];

@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/images/logo/logo.png";
 import { AuthContext } from "../contexts/AuthProvider";
+import { FaShoppingCart } from "react-icons/fa";
 
 const NavItems = () => {
   const [menuToggle, setMenuToggle] = useState(false);
@@ -65,7 +66,7 @@ const NavItems = () => {
                   className="dropdown-menu"
                   aria-labelledby="dropdownMenuButton"
                 >
-                    <li>
+                  <li>
                     <button onClick={handleLogout} className="dropdown-item">
                       Logout
                     </button>
@@ -77,7 +78,7 @@ const NavItems = () => {
                   </li>
                   <li>
                     <Link to="/contact" className="dropdown-item">
-                     Contact
+                      Contact
                     </Link>
                   </li>
                   <li>
@@ -85,8 +86,6 @@ const NavItems = () => {
                       Orders
                     </Link>
                   </li>
-                 
-                
                 </ul>
               </div>
             )}
@@ -125,6 +124,11 @@ const NavItems = () => {
                   <li>
                     <Link to="/contact">Contact</Link>
                   </li>
+                  <li>
+                    <Link to="/cart-page" >
+                      <FaShoppingCart className="fs-4"/>
+                    </Link>
+                  </li>
                 </ul>
               </div>
               {!user ? (
@@ -143,32 +147,32 @@ const NavItems = () => {
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                   >
-                   <img src="\src\assets\images\logo\logo1.png" alt="" />
+                    <img src="\src\assets\images\logo\logo1.png" alt="" />
                   </button>
                   <ul
                     className="dropdown-menu"
                     aria-labelledby="dropdownMenuButton"
                   >
-                   <li>
-                    <button onClick={handleLogout} className="dropdown-item">
-                      Logout
-                    </button>
-                  </li>
-                  <li>
-                    <Link to="/cart-page" className="dropdown-item">
-                      Shopping Cart
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/contact" className="dropdown-item">
-                     Profile
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/about" className="dropdown-item">
-                      Orders
-                    </Link>
-                  </li>
+                    <li>
+                      <button onClick={handleLogout} className="dropdown-item">
+                        Logout
+                      </button>
+                    </li>
+                    <li>
+                      <Link to="/cart-page" className="dropdown-item">
+                        Shopping Cart
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/contact" className="dropdown-item">
+                        Profile
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/about" className="dropdown-item">
+                        Orders
+                      </Link>
+                    </li>
                   </ul>
                 </div>
               )}
