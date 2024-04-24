@@ -67,11 +67,6 @@ const NavItems = () => {
                   aria-labelledby="dropdownMenuButton"
                 >
                   <li>
-                    <button onClick={handleLogout} className="dropdown-item">
-                      Logout
-                    </button>
-                  </li>
-                  <li>
                     <Link to="/cart-page" className="dropdown-item">
                       Shopping Cart
                     </Link>
@@ -82,9 +77,14 @@ const NavItems = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="/about" className="dropdown-item">
+                    <Link to="/order" className="dropdown-item">
                       Orders
                     </Link>
+                  </li>
+                  <li>
+                    <button onClick={handleLogout} className="dropdown-item">
+                      Logout
+                    </button>
                   </li>
                 </ul>
               </div>
@@ -125,8 +125,8 @@ const NavItems = () => {
                     <Link to="/contact">Contact</Link>
                   </li>
                   <li>
-                    <Link to="/cart-page" >
-                      <FaShoppingCart className="fs-4"/>
+                    <Link to="/cart-page">
+                      <FaShoppingCart className="fs-4" />
                     </Link>
                   </li>
                 </ul>
@@ -154,24 +154,24 @@ const NavItems = () => {
                     aria-labelledby="dropdownMenuButton"
                   >
                     <li>
-                      <button onClick={handleLogout} className="dropdown-item">
-                        Logout
-                      </button>
-                    </li>
-                    <li>
                       <Link to="/cart-page" className="dropdown-item">
                         Shopping Cart
                       </Link>
                     </li>
                     <li>
-                      <Link to="/contact" className="dropdown-item">
+                      <Link to="/profile" className="dropdown-item">
                         Profile
                       </Link>
                     </li>
                     <li>
-                      <Link to="/about" className="dropdown-item">
+                      <Link to="/order" className="dropdown-item">
                         Orders
                       </Link>
+                    </li>
+                    <li>
+                      <button onClick={handleLogout} className="dropdown-item">
+                        Logout
+                      </button>
                     </li>
                   </ul>
                 </div>

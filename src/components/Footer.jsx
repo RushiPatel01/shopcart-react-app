@@ -77,27 +77,23 @@ const ItemList = [
 const quickList = [
   {
     text: "Summer Sessions",
-    link: "#",
+    link: "https://www.stonybrook.edu/summer/",
   },
   {
     text: "Events",
-    link: "#",
+    link: "https://allevents.in/ahmedabad",
   },
   {
     text: "Gallery",
-    link: "#",
+    link: "https://react-photo-album.com/",
   },
   {
     text: "Forums",
-    link: "#",
-  },
-  {
-    text: "Privacy Policy",
-    link: "#",
+    link: "https://wordpress.org/support/forums/",
   },
   {
     text: "Terms of Use",
-    link: "#",
+    link: "/about",
   },
 ];
 

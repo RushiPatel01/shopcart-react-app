@@ -2,29 +2,69 @@ import React, { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import "../components/modal.css";
 import { useLocation, useNavigate } from "react-router-dom";
+import { orderCollection } from "../firebase/firebase.config";
+import { addDoc } from "firebase/firestore/lite";
 
 const CheckOutPage = () => {
   const [show, setShow] = useState(false);
   const [activeTab, setActiveTab] = useState("visa");
+  const [formData, setFormData] = useState({
+    name: "",
+    cardNumber: "",
+    expirationDate: "",
+    cvv: "",
+    email: "",
+    cardHolderName: "",
+    extraInfo: "",
+  });
 
-  //handle Tab change
+  // Handle Tab change
   const handleTabChange = (tabId) => {
     setActiveTab(tabId);
   };
 
+  // Show the modal
   const handleShow = () => setShow(true);
+
+  // Close the modal
   const handleClose = () => setShow(false);
 
-  // direct to home page
+  // Direct to home page
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/";
 
-  const handleOrderConfirm = () => {
-    alert("Your Order is placed Succesfully!")
-     localStorage.removeItem("cart");
-     navigate(from,{replace:true})
-  }
+  // Handle form input change
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  // Handle order confirmation
+  const handleOrderConfirm = async () => {
+    try {
+      // Create an order object with payment method
+      const orderData = {
+        paymentMethod: activeTab,
+        ...formData,
+      };
+
+      // Add the order to the orders collection
+      await addDoc(orderCollection, orderData);
+
+      // Alert the user that the order is successful
+      alert("Your Order is placed Successfully!");
+
+      // Clear the cart in local storage
+      localStorage.removeItem("cart");
+
+      // Navigate back to the previous page
+      navigate(from, { replace: true });
+    } catch (error) {
+      console.error("Error adding order: ", error);
+      // Handle error if needed
+    }
+  };
 
   return (
     <div className="modalCard">
@@ -51,12 +91,7 @@ const CheckOutPage = () => {
                         activeTab === "visa" ? "active" : ""
                       }`}
                       id="visa-tab"
-                      data-toggle="tab"
-                      role="tab"
-                      area-controls="visa"
-                      area-selected={activeTab === "visa"}
                       onClick={() => handleTabChange("visa")}
-                      href="#visa"
                     >
                       <img
                         src="https://i.imgur.com/sB4jftM.png"
@@ -71,12 +106,7 @@ const CheckOutPage = () => {
                         activeTab === "paypal" ? "active" : ""
                       }`}
                       id="paypal-tab"
-                      data-toggle="tab"
-                      role="tab"
-                      area-controls="paypal"
-                      area-selected={activeTab === "paypal"}
                       onClick={() => handleTabChange("paypal")}
-                      href="#paypal"
                     >
                       <img
                         src="https://i.imgur.com/yK7EDD1.png"
@@ -108,55 +138,66 @@ const CheckOutPage = () => {
                         <div className="inputbox">
                           <input
                             type="text"
-                            name="name"
+                            name="cardHolderName"
                             id="name"
                             className="form-control"
                             required
+                            value={formData.cardHolderName}
+                            onChange={handleChange}
                           />
                           <span>CardHolder Name</span>
                         </div>
                         <div className="inputbox">
                           <input
                             type="text"
-                            name="number"
+                            name="cardNumber"
                             id="number"
                             min="1"
                             max="999"
                             className="form-control"
                             required
+                            value={formData.cardNumber}
+                            onChange={handleChange}
                           />
                           <span>Card Number</span> <i className="fa fa-eye"></i>
                         </div>
                         <div className="d-flex flex-row">
-                        <div className="inputbox">
-                          <input
-                            type="text"
-                            name="number"
-                            id="number"
-                            min="1"
-                            max="999"
-                            className="form-control"
-                            required
-                          />
-                          <span>Expiration Date</span> 
-                        </div>
-                        <div className="inputbox">
-                          <input
-                            type="text"
-                            name="number"
-                            id="number"
-                            min="1"
-                            max="999"
-                            className="form-control"
-                            required
-                          />
-                          <span>CVV</span> 
-                        </div>
+                          <div className="inputbox">
+                            <input
+                              type="text"
+                              name="expirationDate"
+                              id="expirationDate"
+                              min="1"
+                              max="999"
+                              className="form-control"
+                              required
+                              value={formData.expirationDate}
+                              onChange={handleChange}
+                            />
+                            <span>Expiration Date</span>
+                          </div>
+                          <div className="inputbox">
+                            <input
+                              type="text"
+                              name="cvv"
+                              id="cvv"
+                              min="1"
+                              max="999"
+                              className="form-control"
+                              required
+                              value={formData.cvv}
+                              onChange={handleChange}
+                            />
+                            <span>CVV</span>
+                          </div>
                         </div>
                         <div className="px-5 pay">
-                            <button className="btn btn-success btn-block" onClick={handleOrderConfirm}>
-                                Order Now
-                            </button>
+                          <button
+                            className="btn btn-success btn-block"
+                            onClick={handleOrderConfirm}
+                          >
+                            Order Now
+                          </button>
                         </div>
                       </div>
                     </div>
@@ -171,7 +212,7 @@ const CheckOutPage = () => {
                     role="tabpanel"
                     aria-labelledby="paypal-tab"
                   >
-                     <div className="mt-4 mx-4">
+                    <div className="mt-4 mx-4">
                       <div className="text-center">
                         <h5>Paypal Account Info</h5>
                       </div>
@@ -179,69 +220,85 @@ const CheckOutPage = () => {
                         <div className="inputbox">
                           <input
                             type="text"
+                            name="email"
+                            id="email"
+                            className="form-control"
+                            required
+                            value={formData.email}
+                            onChange={handleChange}
+                          />
+                          <span>Enter Your email</span>
+                        </div>
+                        <div className="inputbox">
+                          <input
+                            type="text"
                             name="name"
                             id="name"
-                            className="form-control"
-                            required
-                          />
-                          <span>Enter You email</span>
-                        </div>
-                        <div className="inputbox">
-                          <input
-                            type="text"
-                            name="number"
-                            id="number"
                             min="1"
                             max="999"
                             className="form-control"
                             required
+                            value={formData.name}
+                            onChange={handleChange}
                           />
-                          <span>Your Name</span> 
+                          <span>Your Name</span>
                         </div>
                         <div className="d-flex flex-row">
-                        <div className="inputbox">
-                          <input
-                            type="text"
-                            name="number"
-                            id="number"
-                            min="1"
-                            max="999"
-                            className="form-control"
-                            required
-                          />
-                          <span>Extra Info</span> 
-                        </div>
-                        <div className="inputbox">
-                          <input
-                            type="text"
-                            name="number"
-                            id="number"
-                            min="1"
-                            max="999"
-                            className="form-control"
-                            required
-                          />
-                          <span></span> 
-                        </div>
+                          <div className="inputbox">
+                            <input
+                              type="text"
+                              name="extraInfo"
+                              id="extraInfo"
+                              min="1"
+                              max="999"
+                              className="form-control"
+                              required
+                              value={formData.extraInfo}
+                              onChange={handleChange}
+                            />
+                            <span>Extra Info</span>
+                          </div>
+                          <div className="inputbox">
+                            <input
+                              type="text"
+                              name="extraInfo2"
+                              id="extraInfo2"
+                              min="1"
+                              max="999"
+                              className="form-control"
+                              required
+                              value={formData.extraInfo2}
+                              onChange={handleChange}
+                            />
+                            <span>Extra Info 2</span>
+                          </div>
                         </div>
                         <div className="px-5 pay">
-                            <button className="btn btn-success btn-block" onClick={handleOrderConfirm}>Add Paypal</button>
+                          <button
+                            className="btn btn-success btn-block"
+                            onClick={handleOrderConfirm}
+                          >
+                            Add Paypal
+                          </button>
                         </div>
                       </div>
                     </div>
-                    </div>
+                  </div>
                 </div>
 
-                {/* payment desclaimer */}
+                {/* payment disclaimer */}
 
-                <p className="mt-3 px-4 p-Desclaimer"><em>Payment Desclaimer: </em>In no event shall payment or partial payment by owner for 
-                    any material or service.
+                <p className="mt-3 px-4 p-Desclaimer">
+                  <em>Payment Disclaimer: </em>In no event shall payment or
+                  partial payment by owner for any material or service.
                 </p>
               </div>
             </div>
           </div>
         </div>
       </Modal>
+      {/* Loader */}
+      {loading && <div className="loader">Loading...</div>}
     </div>
   );
 };

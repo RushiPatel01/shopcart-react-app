@@ -15,6 +15,8 @@ const shopResults = "Showing 01-12 of 139 Results";
 const Shop = () => {
   const [GridList, setGridList] = useState(true);
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true); // State for loading indicator
+
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -25,8 +27,10 @@ const Shop = () => {
         }));
         console.log(newData);
         setProducts(newData);
+        setLoading(false); // Set loading to false when data is fetched
       } catch (error) {
         console.error("Error fetching products:", error);
+        setLoading(false); // Set loading to false in case of error
       }
     };
 
@@ -89,20 +93,27 @@ const Shop = () => {
                   </div>
                 </div>
 
-                {/* product cards  */}
-                <div>
-                  <ProductCards
-                    GridList={GridList}
-                    products={currentProducts}
-                  />
-                </div>
+                {/* Loader while loading */}
+                {loading ? (
+                  <div>Loading...</div>
+                ) : (
+                  <>
+                    {/* product cards  */}
+                    <div>
+                      <ProductCards
+                        GridList={GridList}
+                        products={currentProducts}
+                      />
+                    </div>
 
-                <Pagination
-                  productsPerPage={productsPerPage}
-                  totalProducts={products.length}
-                  paginate={paginate}
-                  activePage={currentPage}
-                />
+                    <Pagination
+                      productsPerPage={productsPerPage}
+                      totalProducts={products.length}
+                      paginate={paginate}
+                      activePage={currentPage}
+                    />
+                  </>
+                )}
               </article>
             </div>
             <div className="col-lg-4 col-12">

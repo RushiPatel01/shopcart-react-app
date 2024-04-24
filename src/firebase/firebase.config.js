@@ -16,8 +16,10 @@ const db = getFirestore(app);
 
 const cartCollection = collection(db, "cartItems");
 const projectCollection = collection(db, "products");
+const orderCollection = collection(db,"Orders");
 
 console.log("cart",cartCollection);
 console.log("data",projectCollection);
-export { db , projectCollection };
+console.log("order",orderCollection);
+export { db , projectCollection ,orderCollection};
 export default firebaseConfig;
