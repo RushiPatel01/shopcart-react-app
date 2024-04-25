@@ -1,6 +1,6 @@
 import React from "react";
 import RushiPatel from "../assets/images/about/icon/rushipatel.jpg";
-import PageHeader from "./PageHeader";
+import PageHeader from "../components/PageHeader";
 
 const Profile = () => {
   return (
