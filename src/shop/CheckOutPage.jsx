@@ -9,14 +9,11 @@ const CheckOutPage = () => {
   const [show, setShow] = useState(false);
   const [activeTab, setActiveTab] = useState("visa");
   const [formData, setFormData] = useState({
-    name: "",
+    cardHolderName: "",
     cardNumber: "",
     expirationDate: "",
     cvv: "",
-    email: "",
-    cardHolderName: "",
-    extraInfo: "",
-  });
+   });
 
   // Handle Tab change
   const handleTabChange = (tabId) => {
@@ -297,8 +294,6 @@ const CheckOutPage = () => {
           </div>
         </div>
       </Modal>
-      {/* Loader */}
-      {loading && <div className="loader">Loading...</div>}
     </div>
   );
 };

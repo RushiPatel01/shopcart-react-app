@@ -30,9 +30,6 @@ import Signup from "./components/Signup.jsx";
 import Profile from "./components/Profile.jsx";
 import Order from "./components/Order.jsx";
 
-
-
-
 const router = createBrowserRouter([
   {
     path: "/",
@@ -59,44 +56,44 @@ const router = createBrowserRouter([
         element: <SingleProduct />,
       },
       {
-        path:"/cart-page",
-        element: <PrivateRoute><CartPage /></PrivateRoute>,
+        path: "/cart-page",
+        element: (
+          <PrivateRoute>
+            <CartPage />
+          </PrivateRoute>
+        ),
       },
       {
-        path:"/about",
+        path: "/about",
         element: <About />,
       },
       {
-        path:"/contact",
+        path: "/contact",
         element: <Contact />,
-      }
+      },
+      {
+        path: "/profile",
+        element: <Profile />,
+      },
     ],
   },
   {
     path: "/login",
-    element: <Login />
+    element: <Login />,
   },
   {
     path: "/signup",
-    element: <Signup />
+    element: <Signup />,
   },
-  {
-    path: "/profile",
-    element: <Profile />
-  },
+
   {
     path: "/order",
-    element: <Order />
-  }
-
-
-
+    element: <Order />,
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
- <AuthProvider>
-  <RouterProvider router={router} />
- </AuthProvider>
-    
- 
+  <AuthProvider>
+    <RouterProvider router={router} />
+  </AuthProvider>
 );

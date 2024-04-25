@@ -42,17 +42,12 @@ const Order = () => {
         {orders.map((order) => (
           <div key={order.id}>
             <h4>Order ID: {order.id}</h4>
+            <p>Product Name: {cartItems.title}</p>
+            <p>Card Holder Name: {order.cardHolderName}</p>
+            <p>Card Number: {order.cardNumber}</p>
+            <p>Expiration Date: {order.expirationDate}</p>
+            <p>CVV: {order.cvv}</p>
             {/* Render other order details here */}
-          </div>
-        ))}
-      </div>
-      <div>
-        <h3>Cart Items:</h3>
-        {cartItems.map((item, index) => (
-          <div key={index}>
-            <p>Item: {item.title}</p>
-            <p>Quantity: {item.quantity}</p>
-            {/* Render other cart item details here */}
           </div>
         ))}
       </div>
