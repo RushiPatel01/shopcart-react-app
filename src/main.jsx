@@ -27,8 +27,8 @@ import AuthProvider from "./contexts/AuthProvider.jsx";
 import PrivateRoute from "./PrivateRoute/PrivateRoute.jsx";
 import Login from "./components/Login.jsx";
 import Signup from "./components/Signup.jsx";
-import Profile from "./components/Profile.jsx";
-import Order from "./components/Order.jsx";
+import Profile from "./profile/Profile.jsx";
+import Order from "./order/Order.jsx";
 
 const router = createBrowserRouter([
   {
